@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bes.max.myhome.cameras.domain.CamerasRepository
+import bes.max.myhome.cameras.domain.models.Camera
 import bes.max.myhome.cameras.domain.usecases.GetCamerasUseCase
 import bes.max.myhome.core.domain.models.ErrorType
 import bes.max.myhome.util.Resource
@@ -46,6 +47,12 @@ class CamerasViewModel(
                     }
                 }
             }
+        }
+    }
+
+    fun updateCamera(camera: Camera) {
+        viewModelScope.launch {
+            repository.updateCameraInDb(camera)
         }
     }
 }
