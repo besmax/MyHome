@@ -9,7 +9,7 @@ interface CamerasRepository {
 
     suspend fun insertListToDb(cameras: List<Camera>)
 
-    suspend fun getFromDb(): Flow<List<Camera>>
+    suspend fun getFromDb(): List<Camera>
 
     suspend fun updateCameraInDb(camera: Camera)
 }

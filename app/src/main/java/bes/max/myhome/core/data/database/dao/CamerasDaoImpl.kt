@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.map
 class CamerasDaoImpl(
     private val realm: Realm
 ) : CamerasDao {
-    override fun getAllCamerasAsFlow(): Flow<List<CameraEntity>> {
-        return realm.query<CameraEntity>().asFlow().map { it.list }
+    override fun getAllCameras(): List<CameraEntity> {
+        return realm.query<CameraEntity>().find()
     }
 
     override fun deleteAllCameras() {

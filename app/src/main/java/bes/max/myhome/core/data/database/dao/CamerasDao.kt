@@ -4,7 +4,7 @@ import bes.max.myhome.core.data.database.entities.CameraEntity
 import kotlinx.coroutines.flow.Flow
 
 interface CamerasDao {
-    fun getAllCamerasAsFlow(): Flow<List<CameraEntity>>
+    fun getAllCameras(): List<CameraEntity>
 
     fun deleteAllCameras()
 
