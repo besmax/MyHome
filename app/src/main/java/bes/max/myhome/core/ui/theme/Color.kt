@@ -1,4 +1,4 @@
-package bes.max.myhome.ui.theme
+package bes.max.myhome.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
