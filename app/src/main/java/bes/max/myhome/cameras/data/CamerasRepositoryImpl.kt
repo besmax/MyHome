@@ -4,6 +4,7 @@ import bes.max.myhome.cameras.data.dto.AllCamerasRequest
 import bes.max.myhome.cameras.data.dto.AllCamerasResponse
 import bes.max.myhome.cameras.domain.CamerasRepository
 import bes.max.myhome.cameras.domain.models.Camera
+import bes.max.myhome.core.data.database.dao.CamerasDao
 import bes.max.myhome.core.data.network.KtorNetworkClient
 import bes.max.myhome.core.data.network.NetworkClient
 import bes.max.myhome.core.domain.models.ErrorType
@@ -14,7 +15,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class CamerasRepositoryImpl(
-    private val networkClient: NetworkClient
+    private val networkClient: NetworkClient,
+    private val dao: CamerasDao
 ) : CamerasRepository {
     override suspend fun getFromNetwork(): Flow<Resource<List<Camera>>> = flow {
         val response = networkClient.doRequest(AllCamerasRequest)
