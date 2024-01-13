@@ -6,4 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface CamerasRepository {
     suspend fun getFromNetwork(): Flow<Resource<List<Camera>>>
+
+    suspend fun insertListToDb(cameras: List<Camera>)
+
+    suspend fun getFromDb(): Flow<List<Camera>>
+
+    suspend fun updateCameraInDb(camera: Camera)
 }

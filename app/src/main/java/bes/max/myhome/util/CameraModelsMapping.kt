@@ -26,4 +26,13 @@ fun CameraEntity.map() = Camera(
     rec = rec
 )
 
+fun Camera.map() = CameraEntity().apply {
+    name = this@map.name
+    snapshot = this@map.snapshot
+    room = this@map.room
+    id = this@map.id
+    favorites = this@map.favorites
+    rec = this@map.rec
+}
+
 

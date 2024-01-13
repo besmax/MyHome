@@ -24,4 +24,12 @@ fun DoorEntity.map() = Door(
     favorites = favorites,
 )
 
+fun Door.map() = DoorEntity().apply {
+    name = this@map.name
+    snapshot = this@map.snapshot
+    room = this@map.room
+    id = this@map.id
+    favorites = this@map.favorites
+}
+
 

@@ -13,6 +13,7 @@ import bes.max.myhome.util.map
 import bes.max.myhome.util.mapToList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class DoorsRepositoryImpl(
     private val networkClient: NetworkClient,
@@ -30,5 +31,17 @@ class DoorsRepositoryImpl(
                 )
             )
         }
+    }
+
+    override suspend fun insertListToDb(doors: List<Door>) {
+        val entities = doors.map { model -> model.map() }
+        dao.addAllDoors(entities)
+    }
+
+    override suspend fun getFromDb(): Flow<List<Door>> =
+        dao.getAllDoorsAsFlow().map { entities -> entities.map { it.map() } }
+
+    override suspend fun updateDoorInDb(door: Door) {
+        dao.updateDoor(door.map())
     }
 }

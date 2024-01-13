@@ -7,4 +7,9 @@ import kotlinx.coroutines.flow.Flow
 interface DoorsRepository {
     suspend fun getFromNetwork(): Flow<Resource<List<Door>>>
 
+    suspend fun insertListToDb(doors: List<Door>)
+
+    suspend fun getFromDb(): Flow<List<Door>>
+
+    suspend fun updateDoorInDb(door: Door)
 }
