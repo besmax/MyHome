@@ -54,6 +54,7 @@ class CamerasViewModel(
     fun updateCamera(camera: Camera) {
         viewModelScope.launch {
             repository.updateCameraInDb(camera)
+            getCameras()
         }
     }
 }
