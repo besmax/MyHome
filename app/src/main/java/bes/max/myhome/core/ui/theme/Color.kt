@@ -17,3 +17,4 @@ val LightGray = Color(android.graphics.Color.parseColor("#F6F6F6"))
 
 val Yellow = Color(android.graphics.Color.parseColor("#E0BE35"))
 val TabIndicatorColor = Blue
+val CardBgColor = Color.White

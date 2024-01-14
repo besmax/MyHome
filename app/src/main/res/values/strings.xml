@@ -3,5 +3,5 @@
     <string name="my_home">Мой дом</string>
     <string name="cameras">Камеры</string>
     <string name="doors">Двери</string>
-    <string name="cameras_error">Произошла ошибка, попробуйте ещё раз</string>
+    <string name="error_message">Произошла ошибка, попробуйте ещё раз</string>
 </resources>
