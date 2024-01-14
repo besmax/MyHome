@@ -53,7 +53,8 @@ class DoorsViewModel(
     fun updateDoor(door: Door) {
         viewModelScope.launch {
             repository.updateDoorInDb(door)
-            getDoors()
+            val newList = repository.getFromDb()
+            _screenState.postValue(DoorsScreenState.Content(newList))
         }
     }
 }

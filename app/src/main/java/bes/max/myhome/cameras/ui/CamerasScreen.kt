@@ -3,6 +3,7 @@ package bes.max.myhome.cameras.ui
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableState
 import androidx.compose.foundation.gestures.DraggableAnchors
 import androidx.compose.foundation.gestures.Orientation
@@ -48,7 +49,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -116,7 +116,7 @@ fun CameraScreenContent(
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun CamerasList(
     cameras: List<Camera>,
@@ -125,6 +125,7 @@ fun CamerasList(
     refreshCameras: () -> Unit
 ) {
 
+    val categoryList = cameras.groupBy { it.room }
     val state = rememberPullToRefreshState()
     if (state.isRefreshing) {
         LaunchedEffect(true) {
@@ -142,14 +143,20 @@ fun CamerasList(
             modifier = Modifier
                 .padding(vertical = 12.dp)
         ) {
-            items(
-                items = cameras,
-                key = { camera -> camera.id }
-            ) { camera ->
-                if (!state.isRefreshing) {
-                    CameraListItem(camera, onItemClick, onFavIconClick)
+            categoryList.forEach { category ->
+                stickyHeader {
+                    CategoryTitle(title = category.key)
+                }
+                items(
+                    items = category.value,
+                    key = { camera -> camera.id }
+                ) { camera ->
+                    if (!state.isRefreshing) {
+                        CameraListItem(camera, onItemClick, onFavIconClick)
+                    }
                 }
             }
+
         }
         PullToRefreshContainer(
             modifier = Modifier
@@ -223,7 +230,8 @@ fun CameraListItem(
                     )
                 }
                 .fillMaxWidth()
-                .padding(start = 20.dp, top = 12.dp, end = 20.dp),
+                .padding(start = 20.dp, top = 12.dp, end = 20.dp)
+                .clickable(onClick = { onItemClick(camera) }),
             colors = CardDefaults.cardColors(
                 containerColor = CardBgColor,
             ),
@@ -306,18 +314,19 @@ fun ShowError() {
 }
 
 @Composable
-@Preview
-fun CameraListItemPreview() {
-    CameraListItem(
-        onItemClick = { },
-        onFavIconClick = { },
-        camera = Camera(
-            name = "Cam1",
-            snapshot = "",
-            room = null,
-            id = 1,
-            favorites = true,
-            rec = true
+fun CategoryTitle(
+    title: String?,
+    modifier: Modifier = Modifier
+) {
+    if (!title.isNullOrBlank()) {
+        Text(
+            text = title,
+            fontWeight = FontWeight.Normal,
+            fontSize = 21.sp,
+            textAlign = TextAlign.Center,
+            color = BlackText,
+            modifier = modifier
+                .padding(start = 20.dp, top = 16.dp, bottom = 12.dp)
         )
-    )
+    }
 }
