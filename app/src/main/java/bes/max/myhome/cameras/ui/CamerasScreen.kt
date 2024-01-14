@@ -85,7 +85,6 @@ fun CamerasScreen(
         onItemClick = { },
         onFavIconClick = { camera -> viewModel.updateCamera(camera) },
         refreshCameras = { viewModel.getCameras() }
-
     )
 
 }
@@ -219,7 +218,8 @@ fun CameraListItem(
                     IntOffset(
                         x = state
                             .requireOffset()
-                            .roundToInt(), y = 0
+                            .roundToInt(),
+                        y = 0
                     )
                 }
                 .fillMaxWidth()

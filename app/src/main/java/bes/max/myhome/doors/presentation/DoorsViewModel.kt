@@ -53,6 +53,7 @@ class DoorsViewModel(
     fun updateDoor(door: Door) {
         viewModelScope.launch {
             repository.updateDoorInDb(door)
+            getDoors()
         }
     }
 }
