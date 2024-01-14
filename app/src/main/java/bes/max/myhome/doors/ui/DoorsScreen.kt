@@ -6,3 +6,8 @@ import androidx.compose.runtime.Composable
 fun DoorsScreen() {
 
 }
+
+@Composable
+fun DoorsScreenContent() {
+
+}

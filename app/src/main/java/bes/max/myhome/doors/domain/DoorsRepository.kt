@@ -9,7 +9,7 @@ interface DoorsRepository {
 
     suspend fun insertListToDb(doors: List<Door>)
 
-    suspend fun getFromDb(): Flow<List<Door>>
+    suspend fun getFromDb(): List<Door>
 
     suspend fun updateDoorInDb(door: Door)
 }

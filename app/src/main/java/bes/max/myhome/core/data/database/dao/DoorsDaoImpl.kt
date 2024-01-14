@@ -3,14 +3,12 @@ package bes.max.myhome.core.data.database.dao
 import bes.max.myhome.core.data.database.entities.DoorEntity
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class DoorsDaoImpl(
     private val realm: Realm
 ) : DoorsDao {
-    override fun getAllDoorsAsFlow(): Flow<List<DoorEntity>> {
-        return realm.query<DoorEntity>().asFlow().map { it.list }
+    override fun getAllDoors(): List<DoorEntity> {
+        return realm.query<DoorEntity>().find()
     }
 
     override fun deleteAllDoors() {
