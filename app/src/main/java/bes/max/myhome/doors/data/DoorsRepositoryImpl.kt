@@ -11,8 +11,11 @@ import bes.max.myhome.doors.domain.models.Door
 import bes.max.myhome.util.Resource
 import bes.max.myhome.util.map
 import bes.max.myhome.util.mapToList
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 
 class DoorsRepositoryImpl(
     private val networkClient: NetworkClient,
@@ -30,17 +33,23 @@ class DoorsRepositoryImpl(
                 )
             )
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun insertListToDb(doors: List<Door>) {
-        val entities = doors.map { model -> model.map() }
-        dao.addAllDoors(entities)
+        withContext(Dispatchers.IO) {
+            val entities = doors.map { model -> model.map() }
+            dao.addAllDoors(entities)
+        }
     }
 
     override suspend fun getFromDb(): List<Door> =
-        dao.getAllDoors().map { it.map() }
+        withContext(Dispatchers.IO) {
+            dao.getAllDoors().map { it.map() }
+        }
 
     override suspend fun updateDoorInDb(door: Door) {
-        dao.updateDoor(door.map())
+        withContext(Dispatchers.IO) {
+            dao.updateDoor(door.map())
+        }
     }
 }

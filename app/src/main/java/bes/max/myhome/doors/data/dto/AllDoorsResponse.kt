@@ -12,7 +12,7 @@ data class AllDoorsResponse(
 @Serializable
 data class DoorDto(
     val name: String,
-    val snapshot: String?,
+    val snapshot: String? = null,
     val room: String?,
     val id: Int,
     val favorites: Boolean,

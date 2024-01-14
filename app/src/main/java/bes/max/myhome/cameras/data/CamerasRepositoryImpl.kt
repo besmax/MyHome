@@ -11,8 +11,11 @@ import bes.max.myhome.core.domain.models.ErrorType
 import bes.max.myhome.util.Resource
 import bes.max.myhome.util.map
 import bes.max.myhome.util.mapToList
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 
 class CamerasRepositoryImpl(
     private val networkClient: NetworkClient,
@@ -30,18 +33,23 @@ class CamerasRepositoryImpl(
                 )
             )
         }
-
-    }
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun insertListToDb(cameras: List<Camera>) {
-        val entities = cameras.map { model -> model.map() }
-        dao.addAllCameras(entities)
+        withContext(Dispatchers.IO) {
+            val entities = cameras.map { model -> model.map() }
+            dao.addAllCameras(entities)
+        }
     }
 
     override suspend fun getFromDb(): List<Camera> =
-        dao.getAllCameras().map { it.map() }
+        withContext(Dispatchers.IO) {
+            dao.getAllCameras().map { it.map() }
+        }
 
     override suspend fun updateCameraInDb(camera: Camera) {
-        dao.updateCamera(camera.map())
+        withContext(Dispatchers.IO) {
+            dao.updateCamera(camera.map())
+        }
     }
 }

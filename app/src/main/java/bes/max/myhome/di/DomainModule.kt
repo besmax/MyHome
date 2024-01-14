@@ -5,6 +5,7 @@ import bes.max.myhome.cameras.domain.CamerasRepository
 import bes.max.myhome.cameras.domain.usecases.GetCamerasUseCase
 import bes.max.myhome.doors.data.DoorsRepositoryImpl
 import bes.max.myhome.doors.domain.DoorsRepository
+import bes.max.myhome.doors.domain.GetDoorsUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -17,4 +18,6 @@ val domainModule = module {
     singleOf(::DoorsRepositoryImpl) bind DoorsRepository::class
 
     factoryOf(::GetCamerasUseCase)
+
+    factoryOf(::GetDoorsUseCase)
 }

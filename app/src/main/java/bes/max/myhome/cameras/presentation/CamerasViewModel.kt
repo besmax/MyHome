@@ -25,7 +25,7 @@ class CamerasViewModel(
     }
 
     fun getCameras() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _screenState.value = CamerasScreenState.Loading
             getCamerasUseCase.execute().collect() { response ->
                 when (response) {
@@ -52,7 +52,7 @@ class CamerasViewModel(
     }
 
     fun updateCamera(camera: Camera) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.updateCameraInDb(camera)
         }
     }
