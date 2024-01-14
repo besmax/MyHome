@@ -1,5 +1,5 @@
 # Тестовое задание (Android Developer)
-![Screen_recording_20231124_212320 (1)](https://github.com/besmax/MyHome/assets/88286767/ee3c5174-4afc-4082-8af9-528445f3a920)
+https://github.com/besmax/MyHome/assets/88286767/15fbc481-8104-437e-a74d-0e1f6b5f632c
 
 ## Дизайн макет: 
 "https://www.figma.com/file/zzhf0xOS7FP6jWK2Tqb1Gy/internship?node-id=0%3A1&t=cXpylF8FuatqK0pR-1"b1Gy/internship?node-id=0%3A1
