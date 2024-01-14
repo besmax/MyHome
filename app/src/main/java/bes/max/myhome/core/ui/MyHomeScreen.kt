@@ -64,7 +64,7 @@ fun MyHomeScreenContent() {
         TabRow(
             selectedTabIndex = tabIndex,
             contentColor = TabIndicatorColor,
-            containerColor = MaterialTheme.colorScheme.background,
+            containerColor = MaterialTheme.colorScheme.background ,
             indicator = {
                 Box(
                     Modifier
