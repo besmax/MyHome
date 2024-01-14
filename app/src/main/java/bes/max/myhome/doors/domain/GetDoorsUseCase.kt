@@ -1,20 +1,19 @@
-package bes.max.myhome.cameras.domain.usecases
+package bes.max.myhome.doors.domain
 
-import bes.max.myhome.cameras.domain.CamerasRepository
-import bes.max.myhome.cameras.domain.models.Camera
 import bes.max.myhome.core.domain.models.ErrorType
+import bes.max.myhome.doors.domain.models.Door
 import bes.max.myhome.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetCamerasUseCase(
-    private val repository: CamerasRepository
+class GetDoorsUseCase(
+    private val repository: DoorsRepository
 ) {
 
-    suspend fun execute(): Flow<Resource<List<Camera>>> = flow {
-        val camerasFromDb = repository.getFromDb()
+    fun execute(): Flow<Resource<List<Door>>> = flow {
+        val doorsFromDb = repository.getFromDb()
 
-        if (camerasFromDb.isEmpty()) {
+        if (doorsFromDb.isEmpty()) {
             repository.getFromNetwork().collect() { response ->
                 when (response) {
                     is Resource.Success -> {
@@ -29,10 +28,8 @@ class GetCamerasUseCase(
                     is Resource.Error -> emit(response)
                 }
             }
-
         } else {
-            emit(Resource.Success(data = camerasFromDb))
+            emit(Resource.Success(data = doorsFromDb))
         }
     }
-
 }
