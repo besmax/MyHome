@@ -9,6 +9,7 @@ import bes.max.myhome.cameras.domain.models.Camera
 import bes.max.myhome.cameras.domain.usecases.GetCamerasUseCase
 import bes.max.myhome.core.domain.models.ErrorType
 import bes.max.myhome.util.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CamerasViewModel(
@@ -24,7 +25,7 @@ class CamerasViewModel(
     }
 
     fun getCameras() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _screenState.value = CamerasScreenState.Loading
             getCamerasUseCase.execute().collect() { response ->
                 when (response) {
@@ -51,7 +52,7 @@ class CamerasViewModel(
     }
 
     fun updateCamera(camera: Camera) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updateCameraInDb(camera)
         }
     }
