@@ -140,7 +140,7 @@ fun CamerasList(
     ) {
         LazyColumn(
             modifier = Modifier
-                .padding(top = 12.dp)
+                .padding(vertical = 12.dp)
         ) {
             items(
                 items = cameras,

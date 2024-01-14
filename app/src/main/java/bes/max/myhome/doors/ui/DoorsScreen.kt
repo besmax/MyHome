@@ -142,7 +142,7 @@ fun DoorsList(
     ) {
         LazyColumn(
             modifier = Modifier
-                .padding(top = 12.dp)
+                .padding(vertical = 12.dp)
         ) {
             items(
                 items = doors,
@@ -198,7 +198,8 @@ fun DoorListItem(
             .fillMaxWidth()
             .wrapContentHeight()
             .anchoredDraggable(state, Orientation.Horizontal)
-            .background(color = MaterialTheme.colorScheme.background)
+            .background(color = MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.CenterEnd
     ) {
         // Icons after left swiping
         Row(
